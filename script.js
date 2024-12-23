@@ -1,33 +1,38 @@
-import { newform,addForm } from "./form";
-let tasks = {}
-document.getElementById("addTaskBtn").addEventListener('click',(event)=>{
-    event.preventDefault();
-    // console.log("clicked");
-    let newTask = task();
-    tasks[newTask.task.title] = newTask;
-    newTask.changeDom(newTask.task.title)
-});
+// // import {formRelated} from '/form.js';
+import {formRelated} from "./form.js"
+let tasks = [];
+let formFunctions = formRelated();
 
-function task(){
-    let task ={
-        title : document.getElementById("title").value,
-        description : document.getElementById("description").value,
-        date : document.getElementById('date').value
 
-    }
+document.getElementById('addBtn').addEventListener('click',()=>{
+    console.log(formFunctions.addForm());
+    formFunctions.addForm();
+ 
 
-    function changeDom(title){
-        let taskTitle = tasks[title].task;
-     
-        document.querySelector('body').innerText = `${taskTitle.title}
-        ${taskTitle.description}${taskTitle.date}`
-
-    }
-
-    return {task,changeDom};
-
-}
-
-document.querySelector('.addBtn').addEventListener('click',()=>{
-    addForm();
 })
+
+// // formFunctions.takeFormData();
+// let addButton = document.getElementById('addTaskBtn');
+// addButton.addEventListener('click',()=>{
+//     console.log("hello");
+
+//     // let formReturns= formFunctions.takeFormData();
+//     // console.log(formReturns)
+     
+// })
+
+
+
+// formFunctions.storeFormData(formReturns,tasks);
+// console.log(tasks)
+
+//For later Project on fixing textarea rows
+
+/*
+let textarea =document.getElementById('description');
+textarea.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        console.log('Enter key pressed');
+    }
+}); */
+
