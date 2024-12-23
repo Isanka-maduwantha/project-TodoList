@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*::after,*::before{
+    box-sizing: border-box;
+    
+}
+body{
+    background-color: blueviolet;
+    min-height: 100vh;
+    height: 100vh;
+}
+form{
+    display: flex;
+    flex-direction: column;
+
+}
+input,button,textarea{
+    border: none;
+    font-family: inherit;
+    padding: 10px 5px;
+
+    &:focus{
+        outline: none;
+    }
+}
+textarea{
+    resize: none;
+}
+#addTaskBtn,.addBtn{
+    cursor: pointer;
+}
+input[type="date"]{
+/* empty */
+}
