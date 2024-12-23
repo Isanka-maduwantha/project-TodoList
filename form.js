@@ -6,17 +6,18 @@ function formRelated(){
     <input type="text" name="title" id="title" placeholder="Title" required>
     <textarea name="description" id="description" placeholder="Description" rows="2"></textarea>
     <input type="date" id="date" required>
-    <button type="button"  id="addTaskBtn">Add Task</button>
+    <button type="button"  class="task-button" id="addTaskBtn">Add Task</button>
     </form>
 
 `;
 
-    function addForm(params) {
-        document.querySelector('.content').innerHTML += formData;
-        let addButton = document.getElementById('addTaskBtn');
-        addButton.addEventListener('click', () => {
-            console.log("hello");
-        });
+    function addForm() {
+        let content = document.querySelector('.content')
+        content.innerHTML += formData;
+        document.querySelector(".task-button").addEventListener('click',()=>{
+            
+            window.alert("hello");
+        })
       
     };
     function takeFormData(params) {

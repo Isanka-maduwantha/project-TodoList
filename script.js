@@ -3,13 +3,19 @@ import {formRelated} from "./form.js"
 let tasks = [];
 let formFunctions = formRelated();
 
+const addBtn = document.getElementById('addBtn');
+addBtn.addEventListener('click',()=>{
+    addBtn.style="display:none";
+    
 
-document.getElementById('addBtn').addEventListener('click',()=>{
-    console.log(formFunctions.addForm());
-    formFunctions.addForm();
- 
+
+        formFunctions.addForm();
+        // formFunctions.addForm();
+    
 
 })
+
+
 
 // // formFunctions.takeFormData();
 // let addButton = document.getElementById('addTaskBtn');
