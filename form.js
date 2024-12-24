@@ -1,20 +1,32 @@
-let tasks = [{
-    date:"",
-    description:"",
-    title: "WakeUp"
-    },
-    {
-        date:"2024.12.30",
-        description:"",
-        title: "WakeUp"   
-    },
-    {
-        date:"2024.12.25",
-        description:"",
-        title: "Brush Teeth"
-    }
+let tasks = {};
+    tasks.defaultProject = {
+            name:"defaultProject",
 
-];
+           Wakeup :{
+                date:"2024.12.30",
+                description:"",
+                title: "WakeUp"   
+            },
+           "Brush Teeth": {
+                date:"2024.12.25",
+                description:"",
+                title: "Brush Teeth"
+            },
+    }
+    tasks.new = {
+        name:"new",
+
+       Wakeup :{
+            date:"2024.12.30",
+            description:"",
+            title: "WakeUp"   
+        },
+       "Brush Teeth": {
+            date:"2024.12.25",
+            description:"",
+            title: "Brush Teeth"
+        },
+}
 function formRelated(){
     let formData = `
 
@@ -58,12 +70,27 @@ function formRelated(){
 
     }
     function changeDom(){
-        let taskContainer = document.querySelector('.task-container')
-        taskContainer.innerHTML ="";
-        tasks.forEach((task)=>{
-             taskContainer.innerHTML+=`
-         <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
-            `
+        let taskContainer = document.querySelector('.task-container');
+        taskContainer.innerHTML =`<li class="todo-title"><span class="title-main">Title</span><span class="title-date">Due Date</span></li>`;
+
+        
+        Object.values(tasks).forEach((Key)=>{
+            console.log(Key.name);
+            let name = Key.name;
+            Object.values(Key).forEach((task,index)=>{
+
+                if(index===0){
+                    console.log(task);
+                    taskContainer.innerHTML+=`<div class="boxTodo ${task}" ><h1>${task}</h1></div>`;
+                }
+                else{
+                       let num = index-1;
+                    document.querySelector(`.${name}`).innerHTML+=`
+                    <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
+                       `;
+                }
+             
+            })
         })
     }    
 
