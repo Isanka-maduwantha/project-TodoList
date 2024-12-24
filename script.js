@@ -1,36 +1,20 @@
-// // import {formRelated} from '/form.js';
-import {formRelated} from "./form.js"
-let tasks = [];
+
+import {formRelated,tasks} from "./form.js"
+
 let formFunctions = formRelated();
 
 const addBtn = document.getElementById('addBtn');
 addBtn.addEventListener('click',()=>{
     addBtn.style="display:none";
+    formFunctions.addForm();
+    formFunctions.getFormData();
     
-
-
-        formFunctions.addForm();
-        // formFunctions.addForm();
     
 
 })
 
 
 
-// // formFunctions.takeFormData();
-// let addButton = document.getElementById('addTaskBtn');
-// addButton.addEventListener('click',()=>{
-//     console.log("hello");
-
-//     // let formReturns= formFunctions.takeFormData();
-//     // console.log(formReturns)
-     
-// })
-
-
-
-// formFunctions.storeFormData(formReturns,tasks);
-// console.log(tasks)
 
 //For later Project on fixing textarea rows
 

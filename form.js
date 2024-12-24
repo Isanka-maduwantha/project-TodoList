@@ -1,4 +1,4 @@
-
+let tasks = [];
 function formRelated(){
     let formData = `
 
@@ -14,28 +14,36 @@ function formRelated(){
     function addForm() {
         let content = document.querySelector('.content')
         content.innerHTML += formData;
-        document.querySelector(".task-button").addEventListener('click',()=>{
-            
-            window.alert("hello");
-        })
+       
       
     };
-    function takeFormData(params) {
+    function getFormData(){
+        let title;
+        let description;
+        let date;
+        document.querySelector(".task-button").addEventListener('click',function(){
+            // preventDefault();
+            document.getElementById('taskForm')
+            title= document.getElementById('title').value;
+            description= document.getElementById('description').value;
+            date= document.getElementById('date').value;
+            let objectInput={
+                title,description,date,
+            }
+            tasks.push(objectInput);
+            console.log(tasks);
+            
+        })
 
- 
 
- 
+    }
+    
 
-        
-    };
-    function storeFormData(dataObject,storeArray) {
-        storeArray.push(dataObject);
-    };
     
 
     return{
-        addForm,takeFormData,storeFormData,
+        addForm,getFormData,
     }
 }
 
-export {formRelated};
+export {formRelated,tasks};
