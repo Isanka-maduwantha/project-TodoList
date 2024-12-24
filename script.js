@@ -2,10 +2,9 @@
 import {formRelated,tasks} from "./form.js"
 
 let formFunctions = formRelated();
-
+formFunctions.changeDom();
 const addBtn = document.getElementById('addBtn');
 addBtn.addEventListener('click',()=>{
-    addBtn.style="display:none";
     formFunctions.addForm();
     formFunctions.getFormData();
     

@@ -123,3 +123,44 @@ input[type="date"]{
 
     }
 }
+.todo-item{
+    list-style-type: none;
+    padding: 10px;
+    box-shadow: 0  1px  #0003;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    
+    .title{
+        font-family: sans-serif;
+        display: flex;
+        gap: 10px;
+        input[type="radio"]{
+            accent-color: var(--main-color);
+            cursor:auto;
+            &::before{
+                content:"";
+                width: 20px;
+                height: 20px;
+                background-color: #fff;
+            }
+        }
+    }
+
+    &:hover{
+        background-color: var(--main-color);
+        color: var(--counter-color);
+        font-weight: bold;
+    }
+}
+.todo-item:nth-child(even){
+    background-color: var(--counter-color-dark);
+
+    &:hover{
+        background-color: var(--main-color);
+        color: var(--counter-color);
+    }
+ 
+
+}

@@ -1,4 +1,20 @@
-let tasks = [];
+let tasks = [{
+    date:"",
+    description:"",
+    title: "WakeUp"
+    },
+    {
+        date:"2024.12.30",
+        description:"",
+        title: "WakeUp"   
+    },
+    {
+        date:"2024.12.25",
+        description:"",
+        title: "Brush Teeth"
+    }
+
+];
 function formRelated(){
     let formData = `
 
@@ -12,8 +28,8 @@ function formRelated(){
 `;
 
     function addForm() {
-        let content = document.querySelector('.content')
-        content.innerHTML += formData;
+        let contentForm = document.querySelector('.form-container')
+        contentForm.innerHTML += formData;
        
       
     };
@@ -32,17 +48,29 @@ function formRelated(){
             }
             tasks.push(objectInput);
             console.log(tasks);
+            let contentForm = document.querySelector('.form-container')
+            contentForm.innerHTML = "";
+            changeDom()
             
         })
 
 
+
     }
-    
+    function changeDom(){
+        let taskContainer = document.querySelector('.task-container')
+        taskContainer.innerHTML ="";
+        tasks.forEach((task)=>{
+             taskContainer.innerHTML+=`
+         <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
+            `
+        })
+    }    
 
     
 
     return{
-        addForm,getFormData,
+        addForm,getFormData,changeDom
     }
 }
 
