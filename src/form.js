@@ -3,12 +3,13 @@ function formRelated(){
     let formData = `
 
     <form id="taskForm">
+    <span class="exit-container"><span class="exit"> </span></span>
     <input type="text" name="title" id="title" placeholder="Title" required>
     <textarea name="description" id="description" placeholder="Description" rows="2"></textarea>
     <input type="date" id="date" required>
     <input type="text" id="project">
     <select id="selectProject">
-        <option>Hello<option>
+        
     </select>
     <button type="button"  class="task-button" id="addTaskBtn">Add Task</button>
     </form>
@@ -17,7 +18,8 @@ function formRelated(){
 
     function addForm() {
         let contentForm = document.querySelector('.form-container');
-        contentForm.innerHTML += formData;
+        contentForm.innerHTML = formData;
+        document.getElementById('selectProject').innerHTML="<option>Hello World</option>"
 
 
 
@@ -36,7 +38,8 @@ function formRelated(){
             title= document.getElementById('title').value;
             description= document.getElementById('description').value;
             date= document.getElementById('date').value;
-            project=document.getElementById('project').value;
+            project=document.getElementById('selectProject').value;
+
           
             let objectInput={
                 title,description,date,project,
@@ -44,7 +47,7 @@ function formRelated(){
             tasks[objectInput.project]+=objectInput;
             console.log(tasks)
             
-            let contentForm = document.querySelector('.form-container');
+
             contentForm.innerHTML = "";
            
             

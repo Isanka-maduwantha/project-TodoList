@@ -12,6 +12,11 @@ addTaskBtn.addEventListener('click',()=>{
     formFunctions.addForm();
     formFunctions.getFormData();
     
+    let contentForm = document.querySelector('.form-container');
+document.querySelector('.exit').addEventListener('click',()=>{
+    contentForm.innerHTML = "";
+    
+})
     
 
 })
@@ -19,6 +24,10 @@ addProjectBtn.addEventListener('click',()=>{
    
    projectFunctions.projectInput();
    projectFunctions.takeAndStoreInput();
+
+   
+   document.querySelector(".exit").addEventListener('click',()=>{
+    document.querySelector(".project-container").innerHTML="";})
 
 
   
