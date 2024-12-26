@@ -1,6 +1,12 @@
 import { tasks } from "./tasks";
 function projectRelated(){
-    let inputElement = `<span class="exit-container"><span class="exit"> </span></span><input type="text" id="projectTitleInput" class="project-title" placeholder="Project Title"><button class="project-title_submit-button" id="projectTitleSumbit">+</button>`;
+    let inputElement = `<input type="text" id="projectTitleInput" class="project-title" placeholder="Project Title">
+    <div class="action-buttons">
+        <span class="exit-container">
+            <span class="exit project-exit"> Cancel</span>
+        </span>
+        <button class="project-title_submit-button" id="projectTitleSumbit">Add Project</button>
+    </div>`;
 
     function addProject(projectValue="pro",object){
         console.log(projectValue)
