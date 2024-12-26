@@ -11,7 +11,7 @@ function projectRelated(){
     function addProject(projectValue="pro",object){
         console.log(projectValue)
         object[projectValue] ={
-            projectValue,
+            project:projectValue,
         }
     }
     function projectInput(){
@@ -43,5 +43,5 @@ function projectRelated(){
 
     return {addProject,projectInput,takeAndStoreInput}
 }
-export {projectRelated};
+export {projectRelated,tasks};
 

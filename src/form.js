@@ -1,4 +1,4 @@
-import{tasks} from "./tasks.js"
+import{tasks} from "./project.js"
 function formRelated(){
     let formData = `
 
@@ -7,11 +7,10 @@ function formRelated(){
     <input type="text" name="title" id="title" placeholder="Title" required>
     <textarea name="description" id="description" placeholder="Description" rows="2"></textarea>
     <input type="date" id="date" required>
-    <input type="text" id="project">
-    <select id="selectProject">
+    <select id="selectProject" required>
         
     </select>
-    <button type="button"  class="task-button" id="addTaskBtn">Add Task</button>
+    <button type=""  class="task-button" id="addTaskBtn">Add Task</button>
     </form>
 
 `;
@@ -19,7 +18,13 @@ function formRelated(){
     function addForm() {
         let contentForm = document.querySelector('.form-container');
         contentForm.innerHTML = formData;
-        document.getElementById('selectProject').innerHTML="<option>Hello World</option>"
+        console.log(tasks);
+        Object.values(tasks).forEach((Key)=>{
+            
+            document.getElementById('selectProject').innerHTML+=`<option>${Key.project}</option>`
+            // let name = Key.project;
+        });
+        
 
 
 
@@ -32,22 +37,27 @@ function formRelated(){
         let description;
         let date;
         let project;
-        document.querySelector(".task-button").addEventListener('click',function(){
-            // preventDefault();
+        document.querySelector(".task-button").addEventListener('click',function(event){
+            // event.preventDefault();
             document.getElementById('taskForm')
             title= document.getElementById('title').value;
             description= document.getElementById('description').value;
             date= document.getElementById('date').value;
-            project=document.getElementById('selectProject').value;
-
+            let select = document.getElementById('selectProject')
+            
+            project= select[select.selectedIndex].value
+            
           
             let objectInput={
                 title,description,date,project,
             }
-            tasks[objectInput.project]+=objectInput;
-            console.log(tasks)
             
+          let task = tasks[objectInput.project]
+          task[objectInput.title]= objectInput;
 
+            console.log(tasks);
+            
+            let contentForm = document.querySelector('.form-container');
             contentForm.innerHTML = "";
            
             
