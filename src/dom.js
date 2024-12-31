@@ -91,26 +91,26 @@ function updateDom(){
     }
     function taskCards(){
         let taskContainer = document.querySelector('.task-container');
-        taskContainer.innerHTML ="";
+        makeInnerUpdate(taskContainer);
         
         
         Object.values(tasks).forEach((Key)=>{
             
-            // let name = Key.project;
-            // document.getElementById('selectProject').innerHTML=`<option>${name}</option>`;
-            // console.log(name)
+            let name = Key.project;
+
+            console.log(name);
             Object.values(Key).forEach((task,index)=>{
 
-                // if(index===0){
-                //     console.log(task);
-                //     taskContainer.innerHTML+=`<div class="boxTodo ${name}" ><h3>${name}</h3></div>`;
-                // }
-                // else{
+                if(index===0){
+                    console.log(task);
+                    taskContainer.innerHTML+=`<div class="boxTodo ${name}" ><h3>${name}</h3></div>`;
+                }
+                else{
                     
-                //     document.querySelector(`.${name}`).innerHTML+=`
-                //     <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
-                //        `;
-                // }
+                    document.querySelector(`.${name}`).innerHTML+=`
+                    <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
+                       `;
+                }
              
             })
         })
@@ -124,6 +124,7 @@ let formFunctions = taskRelated();
 let projectFunctions = projectRelated();
 let updateFunctions = updateDom();
 updateFunctions.projectTabs();
+updateFunctions.taskCards();
 // listen to clickes of taskButtons
 
 const addProjectBtn = document.getElementById('addProject');
