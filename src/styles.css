@@ -113,6 +113,23 @@ textarea{
         }
     
     }
+    #projectTabs{
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+
+        button.project-tab{
+            width: 100%;
+            background-color: var(--counter-color-dark);
+            cursor: pointer;
+            &:hover{
+                background-color: var(--main-color);
+                color: var(--counter-color);
+                font-weight: bold;
+            }
+
+        }
+    }
 }
 .project-container{
     display: flex;

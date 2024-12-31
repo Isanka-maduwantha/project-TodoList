@@ -42,10 +42,16 @@ function consoleLog(value){
     console.log(value);
 };
 // add options inside select or any element by looping through object 
-function addoptions(obj,value){
+function addElements(obj,value,element="option",elementCls=""){
     Object.values(obj).forEach((Key)=>{
-        document.getElementById(value).innerHTML+=`<option>${Key.project}</option>`
+        document.getElementById(value).innerHTML+=`<${element} class="${elementCls}">${Key.project}</${element}>`
     });
+}
+// fuction when exit button clicked
+function clickExitButton(element){
+    document.querySelector(".exit").addEventListener('click',()=>{
+        makeInnerUpdate(element);
+       });
 }
 // FactoryFunctions
 
@@ -68,7 +74,7 @@ function taskRelated(){
         makeInnerUpdate(contentForm,htmlContents.form);
         consoleLog(tasks);
         // add options to select using function
-        addoptions(tasks,'selectProject');
+        addElements(tasks,'selectProject');
 
       
     };
@@ -81,7 +87,7 @@ function taskRelated(){
 
 function updateDom(){
     function projectTabs(){
-
+        addElements(tasks,'projectTabs','button','project-tab');
     }
     function taskCards(){
         let taskContainer = document.querySelector('.task-container');
@@ -108,11 +114,16 @@ function updateDom(){
              
             })
         })
-    }   
+    } 
+    return{
+        projectTabs,taskCards,
+    }  
 }
 const addTaskBtn = document.getElementById('addTask');
 let formFunctions = taskRelated();
 let projectFunctions = projectRelated();
+let updateFunctions = updateDom();
+updateFunctions.projectTabs();
 // listen to clickes of taskButtons
 
 const addProjectBtn = document.getElementById('addProject');
@@ -120,21 +131,15 @@ const addProjectBtn = document.getElementById('addProject');
 addProjectBtn.addEventListener('click',()=>{
    
    projectFunctions.displayProjectInput();
-    document.querySelector(".exit").addEventListener('click',()=>{
-     makeInnerUpdate(projectContainer);
-    });
+   clickExitButton(projectContainer)
+
 
 })
-formFunctions.addTaskForm();
-document.querySelector(".exit").addEventListener('click',()=>{
-    makeInnerUpdate(contentForm);
-   });
-addTaskBtn.addEventListener('click',()=>{
 
-formFunctions.addTaskForm();
-    document.querySelector(".exit").addEventListener('click',()=>{
-     makeInnerUpdate(contentForm);
-    });
+
+addTaskBtn.addEventListener('click',()=>{
+    formFunctions.addTaskForm();
+    clickExitButton(contentForm)
     
 
 })
