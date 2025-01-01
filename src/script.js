@@ -21,6 +21,7 @@ addProjectBtn.addEventListener('click',()=>{
    document.getElementById('projectTitleSumbit').addEventListener('click',()=>{
 
         takeAndStoreInput();
+        updateFunctions.projectTabs();
    });
    clickExitButton(projectContainer);
   
@@ -45,6 +46,7 @@ addTaskBtn.addEventListener('click',()=>{
     document.querySelector('.task-button').addEventListener('click',()=>{
         console.log('Hello');
         storeTaskData();
+        updateFunctions.taskCards();
     });
     clickExitButton(contentForm);
 });

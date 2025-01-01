@@ -28,7 +28,7 @@ let taskContainer = document.querySelector('.task-container');
 // Normal Functions
 
 // function to making innerHTML = "" or add newValue in any element
-function makeInnerUpdate(element,newValue=""){
+function emptyInnerHtml(element,newValue=""){
     // let element = document.querySelector(elementClass);
     if(element === undefined){
         return undefined;
@@ -40,12 +40,16 @@ function makeInnerUpdate(element,newValue=""){
 };
 // function to consolelog
 function consoleLog(value){
-    console.log(value);
+    if(value===undefined){
+        return false;
+    }
+    // console.log(value);
 };
 // add options inside select or any element by looping through object 
 function addElements(obj,value,element="option",elementCls=""){
+        value = document.getElementById(value);
     Object.values(obj).forEach((Key)=>{
-        document.getElementById(value).innerHTML+=`<${element} class="${elementCls}">${Key.project}</${element}>`
+        value.innerHTML+=`<${element} class="${elementCls}">${Key.project}</${element}>`
     });
 }
 // add tasks inside taskContainer by looping through object
@@ -65,7 +69,7 @@ function addTaskElements(key,name){
 // fuction when exit button clicked
 function clickExitButton(element){
     document.querySelector(".exit").addEventListener('click',()=>{
-        makeInnerUpdate(element);
+        emptyInnerHtml(element);
        });
 }
 // FactoryFunctions
@@ -74,7 +78,7 @@ function clickExitButton(element){
 function projectRelated(){
 
     function displayProjectInput(){
-        makeInnerUpdate(projectContainer);
+        emptyInnerHtml(projectContainer);
         projectContainer.innerHTML += htmlContents.inputProjectTitle;
         document.getElementById("projectTitleInput").focus();
     }
@@ -86,7 +90,7 @@ function projectRelated(){
 function taskRelated(){
     function addTaskForm() {
         // adding a form to get task details
-        makeInnerUpdate(contentForm,htmlContents.form);
+        emptyInnerHtml(contentForm,htmlContents.form);
         consoleLog(tasks);
         // add options to select using function
         addElements(tasks,'selectProject');
@@ -102,11 +106,12 @@ function taskRelated(){
 
 function updateDom(){
     function projectTabs(){
-        addElements(tasks,'projectTabs','button','project-tab');
+        document.getElementById('projectTabsGenarated').innerHTML="";
+        addElements(tasks,'projectTabsGenarated','button','project-tab');
     }
     function taskCards(){
        
-        makeInnerUpdate(taskContainer);
+        emptyInnerHtml(taskContainer);
         displayTasks('All');
         document.querySelectorAll('.project-tab').forEach((tab)=>{
             tab.addEventListener('click',()=>{
@@ -115,7 +120,7 @@ function updateDom(){
         })
         function displayTasks(text){
             if(text === 'All'){
-                makeInnerUpdate(taskContainer);
+                emptyInnerHtml(taskContainer);
                 Object.values(tasks).forEach((key)=>{
                     let name = key.project;
                     
@@ -130,7 +135,7 @@ function updateDom(){
                     let name = key.project;
                     if(name === text){
                         consoleLog(name+" "+text);
-                        makeInnerUpdate(taskContainer);
+                        emptyInnerHtml(taskContainer);
                         addTaskElements(key,name);
                     }
                 })
@@ -142,4 +147,4 @@ function updateDom(){
         projectTabs,taskCards,
     }  
 }
-export{projectRelated,taskRelated,updateDom,clickExitButton,contentForm,projectContainer,taskContainer}
+export{projectRelated,taskRelated,updateDom,clickExitButton,emptyInnerHtml,contentForm,projectContainer,taskContainer,tasks}
