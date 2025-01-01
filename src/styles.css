@@ -22,7 +22,7 @@ body{
 }
 .container{
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: minmax(200px,1fr) 5fr;
     grid-template-rows: 1fr;
     height: 100%;
     
@@ -207,7 +207,7 @@ input[type="date"]{
 
         .task-container{
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
             grid-template-rows: auto;
             gap: 20px;
 
@@ -257,8 +257,7 @@ input[type="date"]{
         &:hover{
             text-decoration: underline;
          }
-        input[type="radio"]{
-            accent-color: var(--main-color);
+        input.tick{
             cursor:auto;
             &::before{
                 content:"";
@@ -268,6 +267,11 @@ input[type="date"]{
             }
  
             }
+            input.completed{
+                accent-color: rgb(230, 93, 93);
+            }
+
+        
         
     }
 
@@ -309,4 +313,11 @@ input[type="date"]{
 
 
 
+}
+.line-through{
+    text-decoration: line-through;
+}
+.completeBg{
+    background-color: #000000;
+    color: #fff;
 }

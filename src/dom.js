@@ -61,7 +61,7 @@ function addTaskElements(key,name){
         }
         else{
             document.querySelector(`.${name}`).innerHTML+=`
-            <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>`;
+            <li class="todo-item"><span class="title"><input type="checkbox" name="${task.title}" class="tick"><span class="task-title">${task.title}</span></span><span class="date">${task.date}</span></li>`;
         }
      
     })
@@ -71,6 +71,20 @@ function clickExitButton(element){
     document.querySelector(".exit").addEventListener('click',()=>{
         emptyInnerHtml(element);
        });
+}
+// add line through to an element
+function lineThrough(elementClass,toggle=1){
+    let element = document.querySelector(`${elementClass}`);
+    if(element.innerHTML!==""){
+        if(toggle === 0){
+            element.classList.add('line-through');
+        }
+        else if(toggle === 1){
+            element.classList.toggle('line-through')  
+        }
+    }
+
+
 }
 // FactoryFunctions
 
@@ -97,8 +111,6 @@ function taskRelated(){
 
       
     };
-
- 
     return{
         addTaskForm,
     }
@@ -108,6 +120,7 @@ function updateDom(){
     function projectTabs(){
         document.getElementById('projectTabsGenarated').innerHTML="";
         addElements(tasks,'projectTabsGenarated','button','project-tab');
+        taskCards();
     }
     function taskCards(){
        
@@ -140,11 +153,28 @@ function updateDom(){
                     }
                 })
             }
-
+            taskComplete();
         }
     } 
+
+    function taskComplete(){
+       let checkbox = document.querySelectorAll('.tick')
+       checkbox.forEach((tick)=>{
+            tick.addEventListener('click',()=>{
+                let title =tick.nextSibling.value;
+                
+                tick.classList.toggle('completed');
+                tick.parentElement.nextSibling.classList.toggle('line-through');
+                tick.nextSibling.classList.toggle('line-through');
+                tick.parentElement.parentElement.classList.toggle('completeBg');
+
+            })
+        });
+
+
+    }
     return{
-        projectTabs,taskCards,
+        projectTabs,taskCards
     }  
 }
 export{projectRelated,taskRelated,updateDom,clickExitButton,emptyInnerHtml,contentForm,projectContainer,taskContainer,tasks}
