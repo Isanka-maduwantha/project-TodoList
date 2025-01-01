@@ -1,6 +1,6 @@
 let tasks = {};
-    tasks.defaultProject = {
-            project:"defaultProject",
+    tasks.DefaultProject = {
+            project:"DefaultProject",
 
            Wakeup :{
                 date:"2024.12.30",
@@ -13,8 +13,8 @@ let tasks = {};
                 title: "Brush Teeth",
             },
     }
-    tasks.new = {
-        project:"new",
+    tasks.New = {
+        project:"New",
 
         dance :{
             date:"2024.12.30",

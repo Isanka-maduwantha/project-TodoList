@@ -1,14 +1,14 @@
 import "./styles.css";
 import "./dom.js"
-import {tasks} from "./tasks.js"
-import { projectRelated, taskRelated, updateDom,clickExitButton,projectContainer } from "./dom.js";
+// import {tasks} from "./.js"
+import { projectRelated, taskRelated, updateDom,clickExitButton,projectContainer,tasks}from "./dom.js";
 // import { projectRelated } from "./project.js";
 
 // let formFunctions = formRelated();
 // let projectFunctions = projectRelated();
 // // formFunctions.changeDom();
 // 
-
+let projectTitleInput = document.getElementById('projectTitleInput');
 const addTaskBtn = document.getElementById('addTask');
 let formFunctions = taskRelated();
 let projectFunctions = projectRelated();
@@ -23,17 +23,20 @@ addProjectBtn.addEventListener('click',()=>{
    
    projectFunctions.displayProjectInput();
    clickExitButton(projectContainer)
-
-
+   document.getElementById('projectTitleSumbit').addEventListener('click',()=>{
+        takeAndStoreInput();
+   });
 })
 
 
 addTaskBtn.addEventListener('click',()=>{
     formFunctions.addTaskForm();
+    document.querySelector('.task-button').addEventListener('click',()=>{
+        console.log('Hello');
+        storeTaskData();
+    });
     clickExitButton(contentForm);
-    
-
-})
+});
 
 
 
@@ -51,70 +54,22 @@ textarea.addEventListener('keydown', function(e) {
 let contentForm = document.querySelector('.form-container');
 if(contentForm.innerHTML !==""){
     console.log('Hello1');
-    document.querySelector('.task-button').addEventListener('click',()=>{
-        console.log('Hello');
-    })
-    // getFormData();
-
 }
 
 
-    function getFormData(){
-        let title;
-        let description;
-        let date;
-        let project;
-        document.querySelector(".task-button").addEventListener('click',function(event){
-            // event.preventDefault();
-            console.log('clicked')
-            document.getElementById('taskForm')
-            title= document.getElementById('title').value;
-            description= document.getElementById('description').value;
-            date= document.getElementById('date').value;
-            let select = document.getElementById('selectProject')
-            
-            project= select[select.selectedIndex].value
-            
-          
+    function storeTaskData(){
+        let title= document.getElementById('title').value;
+        let description= document.getElementById('description').value;
+        let date= document.getElementById('date').value;
+        let select = document.getElementById('selectProject')
+        let project= select[select.selectedIndex].value
+            console.log(project);
             let objectInput={
-                title,description,date,project,
+                title,description,date,
             }
             
-          let task = tasks[objectInput.project]
-          task[objectInput.title]= objectInput;
-
+            let task = tasks[project];
             console.log(tasks);
-            
-            
+            task[title]= objectInput;       
             contentForm.innerHTML = "";
-           
-            
-            
-        })
-        
-
-
-
     }
-
-    function addProject(projectValue="pro",object){
-        console.log(projectValue)
-        object[projectValue] ={
-            project:projectValue,
-        }
-    }
-        function takeAndStoreInput(){
-     
-    
-            let projectContainer =document.querySelector(".project-container");
-            let projectTitleInput = document.getElementById('projectTitleInput');
-            document.getElementById('projectTitleSumbit').addEventListener('click',()=>{
-    
-                let title = projectTitleInput.value;
-                projectContainer.innerHTML="";
-                console.log(tasks);
-                addProject(title,tasks);
-            
-    
-            })
-        }
