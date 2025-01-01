@@ -105,8 +105,9 @@ function updateDom(){
         addElements(tasks,'projectTabs','button','project-tab');
     }
     function taskCards(){
-
+       
         makeInnerUpdate(taskContainer);
+        displayTasks('All');
         document.querySelectorAll('.project-tab').forEach((tab)=>{
             tab.addEventListener('click',()=>{
                 displayTasks(tab.textContent);
