@@ -24,6 +24,7 @@ let htmlContents = {
 // All Globally Needed Html Elements
 let contentForm = document.querySelector('.form-container');
 let projectContainer =document.querySelector(".project-container");
+let taskContainer = document.querySelector('.task-container');
 // Normal Functions
 
 // function to making innerHTML = "" or add newValue in any element
@@ -46,6 +47,20 @@ function addElements(obj,value,element="option",elementCls=""){
     Object.values(obj).forEach((Key)=>{
         document.getElementById(value).innerHTML+=`<${element} class="${elementCls}">${Key.project}</${element}>`
     });
+}
+// add tasks inside taskContainer by looping through object
+function addTaskElements(key,name){
+    Object.values(key).forEach((task,index)=>{
+        if(index===0){
+
+            taskContainer.innerHTML+=`<div class="boxTodo ${name}" ><h3>${name}</h3></div>`;
+        }
+        else{
+            document.querySelector(`.${name}`).innerHTML+=`
+            <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>`;
+        }
+     
+    })
 }
 // fuction when exit button clicked
 function clickExitButton(element){
@@ -90,30 +105,37 @@ function updateDom(){
         addElements(tasks,'projectTabs','button','project-tab');
     }
     function taskCards(){
-        let taskContainer = document.querySelector('.task-container');
+
         makeInnerUpdate(taskContainer);
-        
-        
-        Object.values(tasks).forEach((Key)=>{
-            
-            let name = Key.project;
-
-            console.log(name);
-            Object.values(Key).forEach((task,index)=>{
-
-                if(index===0){
-                    console.log(task);
-                    taskContainer.innerHTML+=`<div class="boxTodo ${name}" ><h3>${name}</h3></div>`;
-                }
-                else{
-                    
-                    document.querySelector(`.${name}`).innerHTML+=`
-                    <li class="todo-item"><span class="title"><input type="radio" name="" id="">${task.title}</span><span class="date">${task.date}</span></li>
-                       `;
-                }
-             
+        document.querySelectorAll('.project-tab').forEach((tab)=>{
+            tab.addEventListener('click',()=>{
+                displayTasks(tab.textContent);
             })
         })
+        function displayTasks(text){
+            if(text === 'All'){
+                makeInnerUpdate(taskContainer);
+                Object.values(tasks).forEach((key)=>{
+                    let name = key.project;
+                    
+                        consoleLog(name+" "+text);
+                        addTaskElements(key,name,text);
+                })   
+            }
+            else{
+
+                Object.values(tasks).forEach((key)=>{
+                    
+                    let name = key.project;
+                    if(name === text){
+                        consoleLog(name+" "+text);
+                        makeInnerUpdate(taskContainer);
+                        addTaskElements(key,name);
+                    }
+                })
+            }
+
+        }
     } 
     return{
         projectTabs,taskCards,
