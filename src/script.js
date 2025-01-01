@@ -1,14 +1,9 @@
 import "./styles.css";
 import "./dom.js"
-// import {tasks} from "./.js"
-import { projectRelated, taskRelated, updateDom,clickExitButton,projectContainer,tasks}from "./dom.js";
-// import { projectRelated } from "./project.js";
 
-// let formFunctions = formRelated();
-// let projectFunctions = projectRelated();
-// // formFunctions.changeDom();
-// 
-let projectTitleInput = document.getElementById('projectTitleInput');
+import { projectRelated,taskRelated,updateDom,clickExitButton,emptyInnerHtml,contentForm,projectContainer,taskContainer,tasks} from "./dom.js";
+
+
 const addTaskBtn = document.getElementById('addTask');
 let formFunctions = taskRelated();
 let projectFunctions = projectRelated();
@@ -22,12 +17,28 @@ const addProjectBtn = document.getElementById('addProject');
 addProjectBtn.addEventListener('click',()=>{
    
    projectFunctions.displayProjectInput();
-   clickExitButton(projectContainer)
+   
    document.getElementById('projectTitleSumbit').addEventListener('click',()=>{
+
         takeAndStoreInput();
    });
+   clickExitButton(projectContainer);
+  
 })
-
+function takeAndStoreInput(){
+    let projectTitleInput = document.getElementById('projectTitleInput');
+    let title = projectTitleInput.value;
+    console.log(title);
+    addProject(title,tasks);
+    emptyInnerHtml(projectContainer);
+   
+        function addProject(projectValue,object=tasks){
+            console.log(projectValue)
+            object[projectValue] ={
+            project:projectValue,
+            }
+        }
+    }
 
 addTaskBtn.addEventListener('click',()=>{
     formFunctions.addTaskForm();
@@ -50,13 +61,6 @@ textarea.addEventListener('keydown', function(e) {
         console.log('Enter key pressed');
     }
 }); */
-
-let contentForm = document.querySelector('.form-container');
-if(contentForm.innerHTML !==""){
-    console.log('Hello1');
-}
-
-
     function storeTaskData(){
         let title= document.getElementById('title').value;
         let description= document.getElementById('description').value;
@@ -69,7 +73,9 @@ if(contentForm.innerHTML !==""){
             }
             
             let task = tasks[project];
-            console.log(tasks);
-            task[title]= objectInput;       
-            contentForm.innerHTML = "";
+            task[title]= objectInput;  
+            console.log(tasks);    
+            emptyInnerHtml(contentForm);
+  
     }
+
