@@ -9,7 +9,7 @@ let htmlContents = {
         <select id="selectProject" required>
             
         </select>
-        <button type=""  class="task-button" id="addTaskBtn">Add Task</button>
+        <button type="button"  class="task-button" id="addTaskBtn">Add Task</button>
         </form>`,
     
     inputProjectTitle :`<input type="text" id="projectTitleInput" class="project-title" placeholder="Project Title">
@@ -142,28 +142,4 @@ function updateDom(){
         projectTabs,taskCards,
     }  
 }
-const addTaskBtn = document.getElementById('addTask');
-let formFunctions = taskRelated();
-let projectFunctions = projectRelated();
-let updateFunctions = updateDom();
-updateFunctions.projectTabs();
-updateFunctions.taskCards();
-// listen to clickes of taskButtons
-
-const addProjectBtn = document.getElementById('addProject');
-
-addProjectBtn.addEventListener('click',()=>{
-   
-   projectFunctions.displayProjectInput();
-   clickExitButton(projectContainer)
-
-
-})
-
-
-addTaskBtn.addEventListener('click',()=>{
-    formFunctions.addTaskForm();
-    clickExitButton(contentForm)
-    
-
-})
+export{projectRelated,taskRelated,updateDom,clickExitButton,contentForm,projectContainer,taskContainer}
