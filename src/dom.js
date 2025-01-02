@@ -65,6 +65,7 @@ function addTaskElements(key,name){
         }
      
     })
+    
 }
 // fuction when exit button clicked
 function clickExitButton(element){
@@ -121,6 +122,7 @@ function updateDom(){
         document.getElementById('projectTabsGenarated').innerHTML="";
         addElements(tasks,'projectTabsGenarated','button','project-tab');
         taskCards();
+        taskComplete();
     }
     function taskCards(){
        
@@ -129,6 +131,7 @@ function updateDom(){
         document.querySelectorAll('.project-tab').forEach((tab)=>{
             tab.addEventListener('click',()=>{
                 displayTasks(tab.textContent);
+                taskComplete();
             })
         })
         function displayTasks(text){
@@ -153,25 +156,63 @@ function updateDom(){
                     }
                 })
             }
-            taskComplete();
+ 
         }
     } 
-
+    
     function taskComplete(){
        let checkbox = document.querySelectorAll('.tick')
        checkbox.forEach((tick)=>{
-            tick.addEventListener('click',()=>{
-                let title =tick.nextSibling.value;
-                
-                tick.classList.toggle('completed');
-                tick.parentElement.nextSibling.classList.toggle('line-through');
-                tick.nextSibling.classList.toggle('line-through');
-                tick.parentElement.parentElement.classList.toggle('completeBg');
+            completed(tick);
 
-            })
+
         });
 
 
+    }
+    function completed(tick){
+        let name =tick.nextSibling.textContent;
+        let projectValue = tick.parentElement.parentElement.parentElement.children[0].textContent;
+        let project = tasks[projectValue][name];
+        let  status ; 
+       
+        if(project.complete === true){
+            
+            tick.checked = true;
+            checkStyle('add');
+            
+        }
+        tick.addEventListener('click',()=>{
+            checkStyle('add');
+            
+            status = true;
+            if(tick.checked===false){
+                tick.checkbox = false;
+                status = false;
+                checkStyle('remove')
+            }
+            project.complete = status;
+
+        console.log(project.complete);
+        });
+
+
+        
+        function checkStyle(action){
+            if(action === 'add'){
+                tick.classList.add('completed');
+                tick.parentElement.nextSibling.classList.add('line-through');
+                tick.nextSibling.classList.add('line-through');
+                tick.parentElement.parentElement.classList.add('completeBg');
+            }
+            else if(action === 'remove'){
+                tick.classList.remove('completed');
+                tick.parentElement.nextSibling.classList.remove('line-through');
+                tick.nextSibling.classList.remove('line-through');
+                tick.parentElement.parentElement.classList.remove('completeBg');
+            }
+
+        }
     }
     return{
         projectTabs,taskCards
